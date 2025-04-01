@@ -7,11 +7,15 @@ namespace dsu_compressed {
     }
 
     int DisjointSet::find(int x) {
-
+        if (x != parent_[x])
+            parent_[x] = find(parent_[x]);
+        return parent_[x];
     }
 
-
     void DisjointSet::union_sets(int a, int b) {
+        int root_a = find(a);
+        int root_b = find(b);
+        parent_[root_b] = root_a;
     }
 
 }
