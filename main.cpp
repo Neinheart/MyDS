@@ -1,7 +1,8 @@
-#include "registry.h"
 #include <iostream>
 
-int main(int argc, char* argv[]) {
+#include "registry.h"
+
+int main(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout << "Usage: ./main <mode: func|bench|all> <test_path>\n";
         return 1;
@@ -9,7 +10,6 @@ int main(int argc, char* argv[]) {
 
     std::string mode = argv[1];
     std::string key = argv[2];
-
     if (mode == "func" || mode == "all") {
         auto it = func_test_registry().find(key);
         if (it != func_test_registry().end()) {

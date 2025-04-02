@@ -7,7 +7,8 @@
 using namespace dsu_compressed;
 
 static void run_dsu_disjoint_set_compressed_bench() {
-    constexpr int N = 1'000'000;
+    constexpr int N = 10'000'000;
+
     DisjointSet dsu(N);
 
     std::mt19937 rng(42);
@@ -21,9 +22,10 @@ static void run_dsu_disjoint_set_compressed_bench() {
         dsu.find(dist(rng));
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
+    double time = std::chrono::duration<double>(end - start).count();
 
-    std::cout << "[bench] compressed DSU union+find on " << N << " elements: " << elapsed.count() << " seconds\n";
+    std::cout << std::format("[bench] compressed DSU union+find on {} elements: {:.6f} seconds\n", N, time);
+
 }
 
 REGISTER_BENCH_TEST(dsu_disjoint_set_compressed, run_dsu_disjoint_set_compressed_bench)

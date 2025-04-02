@@ -3,8 +3,6 @@
 #include <unordered_map>
 #include <functional>
 
-
-
 using TestFunc = std::function<void()>;
 
 inline std::unordered_map<std::string, TestFunc>& func_test_registry() {

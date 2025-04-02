@@ -1,14 +1,13 @@
-#include "dsu/disjoint_set_naive.h"
+#include "dsu/disjoint_set_rank.h"
 #include "registry.h"
 #include <chrono>
 #include <iostream>
 #include <random>
 
-using namespace dsu_naive;
+using namespace dsu_rank;
 
-static void run_dsu_disjoint_set_naive_bench() {
-    constexpr int N = 100'000;
-
+static void run_dsu_disjoint_set_rank_bench() {
+    constexpr int N = 10'000'000;
     DisjointSet dsu(N);
 
     std::mt19937 rng(42);
@@ -23,7 +22,9 @@ static void run_dsu_disjoint_set_naive_bench() {
 
     auto end = std::chrono::high_resolution_clock::now();
     double time = std::chrono::duration<double>(end - start).count();
-    std::cout << std::format("[bench] naive DSU union+find on {} elements: {:.6f} seconds\n", N, time);
+
+    std::cout << std::format("[bench] rank DSU union+find on {} elements: {:.6f} seconds\n", N, time);
+
 }
 
-REGISTER_BENCH_TEST(dsu_disjoint_set_naive, run_dsu_disjoint_set_naive_bench)
+REGISTER_BENCH_TEST(dsu_disjoint_set_rank, run_dsu_disjoint_set_rank_bench)
